@@ -1,5 +1,4 @@
 {
-  "private": true,
   "name": "unthen",
   "version": "0.0.0",
   "description": "",
@@ -21,7 +20,10 @@
     "eslint-config-astur": "0.0.2"
   },
   "keywords": [
-    "unthen"
+    "unthen",
+    "then",
+    "promise",
+    "callback"
   ],
   "license": "MIT"
 }
