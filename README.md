@@ -24,6 +24,55 @@ const unthen = require('unthen');
 })()
 ```
 
+## Why?..
+
+Just because [err, res] way is more familiar for many of us, even in promise epoch.
+
+Classic way (from [this](https://blog.risingstack.com/mastering-async-await-in-nodejs/) article):
+
+```js
+async function handler (req, res) {
+    let response
+    try {
+        response = await request('https://user-handler-service')  
+    } catch (err) {
+        logger.error('Http error', err)
+        return res.status(500).send()
+    }
+
+    let document
+    try {
+        document = await Mongo.findOne({ user: response.body.user })
+    } catch (err) {
+        logger.error('Mongo error', err)
+        return res.status(500).send()
+    }
+
+    executeLogic(document, req, res)
+}
+```
+
+New way with `unthen`:
+
+```js
+const U = require('unthen');
+async function handler (req, res) {
+    const [httpErr, response] = U(await request('https://user-handler-service'))
+    if (httpErr) {
+        logger.error('Http error', err)
+        return res.status(500).send()
+    }
+
+    const [mongoErr, document] = U(await Mongo.findOne({ user: response.body.user }))
+    if(mongoErr) {
+        logger.error('Mongo error', err)
+        return res.status(500).send()
+    }
+
+    executeLogic(document, req, res)
+}
+```
+
 ## License
 
 MIT
