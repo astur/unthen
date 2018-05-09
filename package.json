@@ -1,7 +1,7 @@
 {
   "name": "unthen",
   "version": "0.0.1",
-  "description": "",
+  "description": "Convert anything to Promise that resolves to `[err, res]` array",
   "main": "index.js",
   "author": "astur <astur@yandex.ru> (http://kozlov.am/)",
   "scripts": {
