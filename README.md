@@ -57,13 +57,13 @@ New way with `unthen`:
 ```js
 const U = require('unthen');
 async function handler (req, res) {
-    const [httpErr, response] = U(await request('https://user-handler-service'))
+    const [httpErr, response] = await U(request('https://user-handler-service'))
     if (httpErr) {
         logger.error('Http error', err)
         return res.status(500).send()
     }
 
-    const [mongoErr, document] = U(await Mongo.findOne({ user: response.body.user }))
+    const [mongoErr, document] = await U(Mongo.findOne({ user: response.body.user }))
     if(mongoErr) {
         logger.error('Mongo error', err)
         return res.status(500).send()
